@@ -28,5 +28,21 @@ main {
   flex-grow: 1;
 }
 main:has(.back-link) {
-  text-align: center;
+  text-align: start;
+}
+
+.links {
+  padding: 50px 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: large;
+  font-weight: 600;
+}
+
+.links > li > a {
+  display: inline-block;
+  padding: 4px 8px;
+  margin-top: 32px;
+  border: 1px solid;
+  border-radius: 8px;
 }
