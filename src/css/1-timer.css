@@ -20,10 +20,6 @@
     
 }
 
-#datetime-picker:disabled {
-    
-}
-
 .title-box {
     display: flex;
     gap: 8px;
