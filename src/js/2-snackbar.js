@@ -2,8 +2,7 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
 const form = document.querySelector(".form");
-const btn = document.querySelector(".btn");
-const fieldset = document.querySelectorAll("input[state]");
+const fieldset = document.querySelectorAll("input[name='state']");
 
 let options = {
     value: "",
@@ -13,28 +12,31 @@ let options = {
 form.addEventListener("submit", (ev) => {
     ev.preventDefault();
 
-    options.value = form.state.value,
-    options.delay = form.delay.value
+    const selectRadio = Array.from(fieldset).find(radio => radio.checked);
+    options.value = selectRadio ? selectRadio.value : "";
+    options.delay = Number(form.delay.value);
+    console.log(options.value);
+    console.log(options.delay);
 
     const makePromise = ({ value, delay }) => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 if (value === "fulfilled") {
-                    resolve(`Fulfilled promise in ${delay}ms`)
+                    resolve(delay)
                 } else {
-                    reject(`Rejected promise in ${delay}ms`)
+                    reject(delay)
                 }
             }, delay);
         });
     };
 
     makePromise(options)
-        .then(value => iziToast.success({
-            title: value,
+        .then(delay => iziToast.success({
+            title: `Fulfilled promise in ${delay}ms`,
             position: "topRight"
         }))
-        .catch(error => iziToast.error({
-            title: error,
+        .catch(delay => iziToast.error({
+            title: `Rejected promise in ${delay}ms`,
             position: "topRight"
         }));
     
